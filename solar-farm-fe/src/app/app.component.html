@@ -1,0 +1,18 @@
+<nz-layout class="ts-layout">
+  <nz-layout>
+    <nz-header>
+      <h3 nz-typography class="ts-logo">Solar Farm</h3>
+      <ul nz-menu nzMode="horizontal">
+        <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+          <a [routerLink]="['/', 'dashboard']">Dashboard</a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <a [routerLink]="['/', 'simulator']">Simulator</a>
+        </li>
+      </ul>
+    </nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

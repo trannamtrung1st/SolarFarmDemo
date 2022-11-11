@@ -1,0 +1,26 @@
+@import "variables";
+
+.ts- {
+  &logo {
+    margin: $common-space;
+    float: left;
+  }
+}
+
+nz-header {
+  background: #fff;
+}
+
+nz-content {
+  margin: $common-space;
+}
+
+.inner-content {
+  padding: $common-space;
+  background: #fff;
+  min-height: 360px;
+}
+
+nz-footer {
+  text-align: center;
+}

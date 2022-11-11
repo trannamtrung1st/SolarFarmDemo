@@ -1,0 +1,68 @@
+<nz-spin [nzSpinning]="loading">
+  <nz-table #nzTable [nzData]="panelData || []" nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Energy Generated (Kwh)</th>
+        <th>Power Generated (W)</th>
+        <th>Voltage Generated (V)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of nzTable.data; let index = index">
+        <td>{{ index + 1 }}</td>
+        <td>
+          {{ record.panel.name }}
+        </td>
+        <td>
+          <nz-input-number
+            *ngIf="!record.auto; else energyReadonly"
+            [(ngModel)]="record.data.energyGeneratedKwh"
+            [nzMin]="1"
+            [nzMax]="1000"
+            [nzStep]="1"
+          >
+          </nz-input-number>
+          <ng-template #energyReadonly>
+            {{ record.data.energyGeneratedKwh }}
+          </ng-template>
+        </td>
+        <td>
+          <nz-input-number
+            *ngIf="!record.auto; else powerReadonly"
+            [(ngModel)]="record.data.powerGenerated"
+            [nzMin]="1"
+            [nzMax]="1000"
+            [nzStep]="1"
+          >
+          </nz-input-number>
+          <ng-template #powerReadonly>
+            {{ record.data.powerGenerated }}
+          </ng-template>
+        </td>
+        <td>
+          <nz-input-number
+            *ngIf="!record.auto; else voltageReadonly"
+            [(ngModel)]="record.data.voltageGenerated"
+            [nzMin]="1"
+            [nzMax]="1000"
+            [nzStep]="1"
+          >
+          </nz-input-number>
+          <ng-template #voltageReadonly>
+            {{ record.data.voltageGenerated }}
+          </ng-template>
+        </td>
+        <td>
+          <nz-switch
+            [(ngModel)]="record.auto"
+            nzCheckedChildren="Auto"
+            nzUnCheckedChildren="Auto"
+          ></nz-switch>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-spin>

@@ -1,0 +1,9 @@
+﻿migrationBuilder.Sql(@"
+CREATE VIEW SolarPanelDataAggregate AS
+SELECT sp.Name, spd.EnergyGeneratedKwh, spd.PowerGenerated, spd.VoltageGenerated
+FROM SolarPanels sp
+INNER JOIN (
+    SELECT *, ROW_NUMBER() OVER(PARTITION BY PanelId ORDER BY Time DESC) AS RowNum 
+    FROM SolarPanelData
+) as spd ON sp.Id = spd.PanelId
+WHERE spd.RowNum=1");

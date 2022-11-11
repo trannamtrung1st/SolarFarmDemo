@@ -1,9 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using SolarFarm.Entities;
 using SolarFarm.IotDataHandler;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((context, services) =>
     {
         services.AddHostedService<Worker>();
+
+        services.AddDbContext<IotDataContext>(opt =>
+            opt.UseSqlServer(context.Configuration.GetConnectionString("IotDataContext")));
     })
     .Build();
 
