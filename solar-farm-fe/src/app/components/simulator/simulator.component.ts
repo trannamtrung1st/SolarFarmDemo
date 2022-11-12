@@ -60,26 +60,29 @@ export class SimulatorComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.panelData.forEach(record => {
         let newData: SolarPanelData;
+        const energyRand = Math.random() > 0.98 ? 500 : 40;
+        const powerRand = Math.random() < 0.01 ? 800 : 40;
+        const voltageRand = Math.random() > 0.99 ? 600 : 40;
         if (record.auto) {
           newData = {
             panelId: record.data.panelId,
-            energyGeneratedKwh: Math.round(Math.random() * 1000),
-            powerGenerated: Math.round(Math.random() * 600),
-            voltageGenerated: Math.round(Math.random() * 300),
+            energyGeneratedKwh: Math.round(Math.random() * energyRand + 70),
+            powerGenerated: Math.round(Math.random() * powerRand + 50),
+            voltageGenerated: Math.round(Math.random() * voltageRand + 30),
           };
           record.data = newData;
         } else {
           newData = { ...record.data };
-          newData.energyGeneratedKwh = Math.round(newData.energyGeneratedKwh || Math.random() * 1000);
-          newData.powerGenerated = Math.round(newData.powerGenerated || Math.random() * 600);
-          newData.voltageGenerated = Math.round(newData.voltageGenerated || Math.random() * 300);
+          newData.energyGeneratedKwh = Math.round(newData.energyGeneratedKwh || Math.random() * energyRand);
+          newData.powerGenerated = Math.round(newData.powerGenerated || Math.random() * powerRand);
+          newData.voltageGenerated = Math.round(newData.voltageGenerated || Math.random() * voltageRand);
         }
 
         this._iotDataService.sendIotData(newData).subscribe();
       });
 
       this._simulateData();
-    }, Math.random() * 1500 + 500);
+    }, Math.random() * 500 + 250);
   }
 
 }

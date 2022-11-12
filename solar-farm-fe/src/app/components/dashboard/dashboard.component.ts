@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private _setupDashboardIframe() {
     this._dashboardService.getDashboardToken().subscribe(tokenModel => {
-      const dashboardUrl = new URL("/embed/dashboard/" + tokenModel.token + "#refresh=1&theme=night&bordered=true&titled=true",
+      const dashboardUrl = new URL("/embed/dashboard/" + tokenModel.token + "#refresh=1&theme=night&bordered=true",
         tokenModel.baseUrl).toString();
       const safeDashboardUrl = this._sanitizer.bypassSecurityTrustResourceUrl(dashboardUrl);
       this.dashboardUrl = safeDashboardUrl;
